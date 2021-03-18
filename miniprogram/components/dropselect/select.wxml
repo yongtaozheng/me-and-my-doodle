@@ -1,0 +1,11 @@
+<view class="select-box">
+    <view catchtap="openClose" class="select-current">
+        <text class="current-name">{{current.name}}</text>
+    </view>
+    <view catchtap="optionTap" class="option-list" wx:if="{{isShow}}">
+        <text class="option" data-id="{{defaultOption.id}}" data-name="{{defaultOption.name}}">{{defaultOption.name}}
+    </text>
+        <text class="option" data-id="{{item.id}}" data-name="{{item.name}}" wx:for="{{result}}" wx:key="{{item.id}}">{{item.name}}
+    </text>
+    </view>
+</view>

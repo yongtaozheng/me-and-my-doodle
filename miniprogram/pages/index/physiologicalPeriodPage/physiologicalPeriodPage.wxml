@@ -1,0 +1,36 @@
+<view wx:if="{{choose==0}}">
+    <calendar bind:select="select" bind:today="today" id="calendar"></calendar>
+    <view bindtap="add" class="addbtn">{{title}}</view>
+    <view class="addbtn">{{selectdate}}</view>
+</view>
+<view wx:if="{{choose==1}}">
+    <view class="huizong">汇总统计</view>
+    <view class="hz">
+      上次辛苦日为：{{lastday}},距今{{distance}}天
+    </view>
+    <view class="hzlists" wx:for="{{huizong}}">
+        <view class="hzcard">
+            <view class="hzind">{{index+1}}</view>
+            <view class="hzdn">
+                <view class="hzdate">{{item.date}}</view>
+                <view class="hznum">共{{item.num}}天</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="tabBar">
+    <view class="tabBar-item">
+        <view bindtap="changeTab" data-id="0">
+            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标记.png" wx:if="{{choose==1}}"></image>
+            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标记1.png" wx:if="{{choose==0}}"></image>
+        </view>
+        <view bindtap="changeTab" class="" data-id="0">标记</view>
+    </view>
+    <view class="tabBar-item">
+        <view bindtap="changeTab" data-id="1">
+            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/汇总.png" wx:if="{{choose==0}}"></image>
+            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/汇总1.png" wx:if="{{choose==1}}"></image>
+        </view>
+        <view bindtap="changeTab" class="" data-id="1">汇总</view>
+    </view>
+</view>

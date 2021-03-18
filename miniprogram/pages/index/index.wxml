@@ -1,0 +1,43 @@
+<view class="page">
+    <view class="left">
+        <text class="text">生活</text>
+    </view>
+    <view class="left">
+        <text class="text1">保持热爱，奔赴山河</text>
+    </view>
+    <loopimg id="loopimg"></loopimg>
+    <view class="left1">
+        <text class="text2">Choice</text>
+    </view>
+    <view class="left">
+        <text class="text3">功能选择</text>
+    </view>
+    <view class="button">
+        <view wx:for="{{buttonList}}" wx:key="index">
+            <view>
+                <image bindtap="{{item.btap}}" class="image1" src="{{item.bimg}}"></image>
+            </view>
+            <view class="buttontip">
+                <text class="text4">{{item.btip}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="hideModal" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{!hiddenmodalput}}"></view>
+<view catchtouchmove="preventTouchMove" class="modal-dialog" wx:if="{{!hiddenmodalput}}">
+    <view class="modal-title">{{tip}}</view>
+    <view class="modal-content">
+        <view class="modal-input">
+            <input bindinput="inputUsername" class="input" maxlength="20" placeholder="用户名" placeholderClass="input-holder" type="text" value="{{username}}"></input>
+        </view>
+        <view class="modal-input">
+            <input bindinput="inputPassword" class="input" maxlength="20" placeholder="密码" placeholderClass="input-holder" type="text" value="{{password}}"></input>
+        </view>
+    </view>
+    <view class="modal-footer">
+        <navigator class="btn-cancel" openType="exit" target="miniProgram">
+      退出
+    </navigator>
+        <view bindtap="confirm" class="btn-confirm" data-status="confirm">确定</view>
+    </view>
+</view>
