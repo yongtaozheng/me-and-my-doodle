@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -20,6 +21,12 @@
         {
           "name": "pages/index/physiologicalPeriodPage/physiologicalPeriodPage",
           "pathName": "pages/index/physiologicalPeriodPage/physiologicalPeriodPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/costPage/costPage",
+          "pathName": "pages/index/costPage/costPage",
           "scene": null
         }
       ]

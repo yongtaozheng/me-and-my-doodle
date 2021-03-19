@@ -5,6 +5,33 @@ page {
     justify-content: flex-start;
 }
 
+.searchview{
+    display: flex;
+    height: 8vh;
+    width: 95vw;
+    margin: 5px auto;
+    /* border: #000 solid 1px; */
+}
+.searchview .searchtag{
+    border: #000 solid 1px;
+    flex:1;
+    opacity: 0.8;
+}
+.searchview .tagdetail{
+    border: #000 solid 1px;
+    flex:3;
+    margin-left: 2px;
+    margin-right: 2px;
+    opacity: 0.8;
+}
+.searchview .searchbtn{
+    border: #000 solid 1px;
+    flex:1;
+    line-height: 8vh;
+    text-align: center;
+    background-color: skyblue;
+}
+
 .divLine {
     background: #E0E3DA;
     width: 100%;

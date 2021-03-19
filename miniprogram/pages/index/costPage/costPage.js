@@ -27,9 +27,20 @@ Page({
     data: {
         hiddenmodalput: !0,
         place: "",
-        selected: {},
+        selected: {},//添加记录中选中的
+        selected1:{},//搜索框中tag选中的
         allTime: [],
-        dateCost: {}
+        dateCost: {},
+        selectdateCost:{},
+        selectCost:[],
+        searchdate:'',//搜索日期
+        selecttag:[
+            {_id: "1", typename: "标签", detail: "标签", username: "郑勇涛"},
+            {_id: "2", typename: "时间", detail: "标签", username: "郑勇涛"},
+        ],
+        tagind:0,
+        tagdetail:[
+        ],//搜索标签
     },
     getAllTime: function() {
         for (var t = this.data.allCost, e = [], a = 0; a < t.length; a++) e.push(t[a].time.substring(0, 10));
@@ -49,8 +60,15 @@ Page({
         });
     },
     change: function(t) {
+        console.log(t);
         this.setData({
             selected: n({}, t.detail)
+        });
+    },
+    change1: function(t) {
+        console.log(t);
+        this.setData({
+            selected1: n({}, t.detail)
         });
     },
     close: function() {
@@ -82,6 +100,11 @@ Page({
     changeDate: function(t) {
         this.setData({
             nowdate: t.detail.value
+        });
+    },
+    changeDate1: function(t) {
+        this.setData({
+            searchdate: t.detail.value
         });
     },
     inputMark: function(t) {
@@ -171,6 +194,77 @@ Page({
             }
         });
     },
+    searchbtn(e){
+        wx.showLoading({
+          title: 'search……',
+        })
+        let allCost = this.data.allCost,
+            selected1 = this.data.selected1,
+            tj = '',
+            selectCost = [],
+            dateCost = [],
+            datelist = [];
+        if(selected1.id == 1){
+            tj = this.selectComponent('#tagdetail').data.current.name;
+        }else if(selected1.id == 2){
+            tj = this.data.searchdate;
+        }
+        // for(let i = 0; i < allCost.length;i++){
+        //     if(allCost[i].ctype == undefined){
+        //         console.log('111',allCost[i],i);
+        //     }
+        // }
+        if(tj == '标签名' || tj == ''){
+            this.setData({
+                selectCost:this.data.allCost,
+                selectdateCost:this.data.dateCost
+            })
+            wx.hideLoading({
+              success: (res) => {
+                // console.log(tj,datelist,dateCost);
+              },
+            })
+            return;
+        }
+        for(let i = 0; i < allCost.length;i++){
+            //按标签筛选
+            if(selected1.id == 1 && allCost[i].ctype == tj){
+                selectCost.push(allCost[i]);
+                let ind = datelist.indexOf(allCost[i].date);
+                if(ind > -1){
+                    dateCost[ind].price += parseFloat(allCost[i].price);
+                }else{
+                    datelist.push(allCost[i].date);
+                    let tmp = {"date":allCost[i].date,
+                                "price":parseFloat(allCost[i].price)};
+                    dateCost.push(tmp); 
+                }
+            }else if(selected1.id == 2 && allCost[i].date == tj){//按时间筛选
+                selectCost.push(allCost[i]);
+                let ind = datelist.indexOf(allCost[i].date);
+                if(ind > -1){
+                    dateCost[ind].price += parseFloat(allCost[i].price);
+                }else{
+                    datelist.push(allCost[i].date);
+                    let tmp = {"date":allCost[i].date,
+                                "price":parseFloat(allCost[i].price)};
+                    dateCost.push(tmp); 
+                }
+            }
+        }
+        for(let i = 0; i < dateCost.length;i++){
+            dateCost[i].price = dateCost[i].price.toFixed(2);
+        }
+        this.setData({
+            selectCost:selectCost,
+            selectdateCost:dateCost
+        })
+        wx.hideLoading({
+          success: (res) => {
+            console.log(tj,datelist,dateCost);
+          },
+        })
+    },
     onLoad: function(t) {
         var a = this;
         wx.getStorage({
@@ -208,7 +302,9 @@ Page({
                 console.log("dateCost", s, u), a.setData({
                     allCost: o,
                     allTime: n,
-                    dateCost: u
+                    dateCost: u,
+                    selectCost:o,
+                    selectdateCost:u,
                 }), console.log("allCost:", t.result.data);
             }
         }), wx.cloud.callFunction({
@@ -218,7 +314,8 @@ Page({
             },
             success: function(t) {
                 a.setData({
-                    allType: t.result.data
+                    allType: t.result.data,
+                    tagdetail:t.result.data,
                 }), console.log("allType:", t.result.data);
             }
         });

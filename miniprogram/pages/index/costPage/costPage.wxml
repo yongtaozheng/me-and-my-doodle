@@ -1,9 +1,24 @@
+<totop></totop>
 <view class="title">消费记录</view>
-<block wx:for="{{dateCost}}" wx:for-item="i" wx:key="index">
+<view class="searchview">
+    <view class="searchtag">
+        <select bind:change="change1" id="searchtag" key="_id" options="{{selecttag}}" text="typename"></select>
+    </view>
+    <view class="tagdetail">
+        <select bind:change="change" id="tagdetail" key="_id" options="{{tagdetail}}" text="typename" wx:if="{{selected1.id == 1}}"></select>
+        <picker bindchange="changeDate1" class="input-holder" end="2100-01-01" mode="date" value="{{searchdate}}" wx:if="{{selected1.id == 2}}">
+            <input class="input" disabled="ture" maxlength="20" placeholder="日期" placeholderClass="input-holder" type="text" value="{{searchdate}}"></input>
+        </picker>
+    </view>
+    <view class="searchbtn" bindtap="searchbtn">
+        search
+    </view>
+</view>
+<block wx:for="{{selectdateCost}}" wx:for-item="i" wx:key="index">
     <view class="divLine"></view>
     <view class="date">----{{i.date}}----合计：￥{{i.price}}</view>
     <view class="divLine"></view>
-    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{item.color}};" wx:if="{{i.date==item.date}}" wx:for="{{allCost}}" wx:key="index">
+    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{item.color}};" wx:if="{{i.date==item.date}}" wx:for="{{selectCost}}" wx:key="index">
         <image class="image_1" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费总额.png"></image>
         <view class="view_wenzi2" data-id="{{index}}">
             <text>#{{item.ctype}}--{{item.username=='郑勇涛'?'熊先生':'桃小姐'}}--￥{{item.price}}</text>
@@ -15,7 +30,7 @@
 </block>
 <view class="zhanwei"></view>
 <view class="tabBar">
-    <view class="tabBar-item">
+    <view class="tabBar-item" bindanimationend="addCost">
         <view bindtap="addCost">
             <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费记录.png"></image>
         </view>
