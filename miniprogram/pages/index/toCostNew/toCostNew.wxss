@@ -1,1 +1,85 @@
 /* miniprogram/pages/index/toCostNew/toCostNew.wxss */
+.form-item:first-child{
+  margin-top: 1rem;
+  line-height: 1.5rem;
+}
+.form-item-title{
+  text-indent: 1em;
+}
+.form-item-cost{
+  margin-left: 3em;
+}
+.form-list{
+  width: 98%;
+  margin-left: 1%;
+}
+.btn-list{
+  margin-top: 0.5rem;
+  display: flex;
+}
+
+.form-item-title-box{
+    display: flex;
+    background-color: #ccccd6;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-bottom: grey 1px solid;
+}
+
+.form-item-icon{
+  margin-left:auto;
+  font-size: large;
+}
+
+.form-item-content{
+  background-color: #e2e1e4;
+  line-height: 2rem;
+}
+
+.item-content-btn-box{
+  display: flex;
+}
+
+.form-item-content-item{
+  display: flex;
+  border-bottom: grey 1px solid;
+}
+
+.form-item-content-item-text{
+  text-indent: 2em;
+}
+.form-item-content-item-input{
+  line-height: 2rem;
+  border-bottom: 1px solid black;
+  margin-left: 2em;
+
+}
+
+.form-item-delete{
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: red;
+  border-radius: 50% 50%;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  line-height: 1.5rem;
+  margin-top: 0.75rem;
+  margin-left:auto;
+}
+
+.form-item-content-item-delete{
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: red;
+  border-radius: 50% 50%;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  line-height: 1.5rem;
+  margin-top: 0.25rem;
+  margin-left:auto;
+}

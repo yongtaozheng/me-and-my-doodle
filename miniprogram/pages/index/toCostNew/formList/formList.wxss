@@ -6,6 +6,13 @@
   margin-top: 1rem;
   line-height: 1.5rem;
 }
+.form-item-title{
+  text-indent: 1em;
+}
+.form-list{
+  width: 98%;
+  margin-left: 1%;
+}
 
 .form-item-title-box{
     display: flex;
@@ -32,6 +39,7 @@
 
 .form-item-content-item{
   display: flex;
+  border-bottom: grey 1px solid;
 }
 
 .form-item-delete{
@@ -49,7 +57,7 @@
 }
 
 .form-item-content-item-text{
-  text-indent: 1em;
+  text-indent: 2em;
 }
 
 .form-item-content-item-delete{

@@ -12,4 +12,38 @@
     id="calendar"
     >
   </myCalendar>
+  <view class="btn-list">
+    <button type="primary" size="mini" bindtap="saveCost">确定</button>
+  </view>
+  <view class="form-list">
+    <view class="form-item" wx:for="{{formList}}" wx:key="_id">
+      <view class="form-item-title-box" data-index="{{index}}" catchtap="showContent" >
+        <view class="form-item-title">
+          {{item._id}}
+        </view>
+        <view class="form-item-cost">
+          ￥{{cost[item._id].cost}}
+        </view>
+        <view class="form-item-icon" wx:if="{{!delBtnList[index]}}">
+          >
+        </view>
+        <view class="form-item-icon" wx:if="{{delBtnList[index]}}">
+          ∨
+        </view>
+        <view class="form-item-delete" wx:if="{{delBtnShow}}" data-index="{{index}}" data-id="{{item._id}}" catchtap="deleteItem">X</view>
+      </view>
+      <view class="form-item-content" wx:if="{{delBtnList[index]}}">
+        <view class="form-item-content-item" wx:for-item="item2" wx:for-index="index2" wx:for="{{item.list}}" wx:key="index2">
+          <text class="form-item-content-item-text">{{item2}}:</text>
+          <input type="number" 
+                data-id="{{item._id}}" 
+                data-prop="{{item2}}" 
+                bind:input="onChange" 
+                placeholder="请输入" 
+                value="{{cost[item._id][item2]}}"
+                class="form-item-content-item-input"/>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

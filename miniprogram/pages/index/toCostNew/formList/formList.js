@@ -142,7 +142,8 @@ Page({
               showCancel: !1
           });
           _this.setData({
-            hiddenmodalput:true
+            hiddenmodalput:true,
+            theme:''
           });
           _this.getFormList();
       },
@@ -166,7 +167,8 @@ Page({
     })
     .catch(console.error)
     this.setData({
-      hiddenmodalput1:true
+      hiddenmodalput1:true,
+      item:''
     })
   },
   
@@ -229,7 +231,7 @@ Page({
           name: "myFormList"
       },
       success: res => {
-        console.log('getFormList',res.result.data);
+        // console.log('getFormList',res.result.data);
         this.setData({
           allData:res.result.data
         });
