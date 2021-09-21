@@ -27,6 +27,18 @@
         {
           "name": "pages/index/costPage/costPage",
           "pathName": "pages/index/costPage/costPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "消费记录",
+          "pathName": "pages/index/toCostNew/toCostNew",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "表单管理",
+          "pathName": "pages/index/toCostNew/formList/formList",
           "scene": null
         }
       ]

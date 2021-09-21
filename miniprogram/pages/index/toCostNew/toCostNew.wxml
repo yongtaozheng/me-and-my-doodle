@@ -1,0 +1,15 @@
+<!--miniprogram/pages/index/toCostNew/toCostNew.wxml-->
+<!-- <text>miniprogram/pages/index/toCostNew/toCostNew.wxml</text> -->
+<view>
+  <view>
+    <button type="primary" size="mini" data-url="formList/formList" bindtap="toUrl">查看表单</button>
+  </view>
+  <myCalendar 
+    showTitle="Records of consumption" 
+    flagImg="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/钱.png"
+    bind:select="select" 
+    bind:today="today" 
+    id="calendar"
+    >
+  </myCalendar>
+</view>

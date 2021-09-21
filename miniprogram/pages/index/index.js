@@ -1,6 +1,10 @@
 Page({
     data: {
         buttonList: [ {
+            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费记录1.png",
+            btap: "toCostNew",
+            btip: "消费记录"
+        },{
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标签.png",
             btap: "toType",
             btip: "查看标签"
@@ -117,6 +121,11 @@ Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     onShareAppMessage: function() {},
+    toCostNew: function(t){
+        wx.navigateTo({
+            url: "toCostNew/toCostNew"
+        });
+    },
     toType: function(t) {
         wx.navigateTo({
             url: "typePage/typePage"

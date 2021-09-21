@@ -30,8 +30,8 @@ Page({
         selected: {},//添加记录中选中的
         selected1:{},//搜索框中tag选中的
         allTime: [],
-        dateCost: {},
-        selectdateCost:{},
+        dateCost: [],
+        selectdateCost:[],
         selectCost:[],
         searchdate:'',//搜索日期
         selecttag:[
@@ -41,6 +41,8 @@ Page({
         tagind:0,
         tagdetail:[
         ],//搜索标签
+        showNum:15,//显示条数
+        canshowMore:1,
     },
     getAllTime: function() {
         for (var t = this.data.allCost, e = [], a = 0; a < t.length; a++) e.push(t[a].time.substring(0, 10));
@@ -209,16 +211,12 @@ Page({
         }else if(selected1.id == 2){
             tj = this.data.searchdate;
         }
-        // for(let i = 0; i < allCost.length;i++){
-        //     if(allCost[i].ctype == undefined){
-        //         console.log('111',allCost[i],i);
-        //     }
-        // }
         if(tj == '标签名' || tj == ''){
             this.setData({
-                selectCost:this.data.allCost,
-                selectdateCost:this.data.dateCost
+                selectCost:allCost,
+                selectdateCost:this.data.dateCost,
             })
+            // this.showMore(this.data.allCost);
             wx.hideLoading({
               success: (res) => {
                 // console.log(tj,datelist,dateCost);
@@ -226,6 +224,9 @@ Page({
             })
             return;
         }
+        this.setData({
+            canshowMore:0,
+        })
         for(let i = 0; i < allCost.length;i++){
             //按标签筛选
             if(selected1.id == 1 && allCost[i].ctype == tj){
@@ -299,13 +300,14 @@ Page({
                     var p = {};
                     p.date = n[h], p.price = s[n[h]], u[h] = p, u[h].price = u[h].price.toFixed(2);
                 }
+                
                 console.log("dateCost", s, u), a.setData({
                     allCost: o,
-                    allTime: n,
                     dateCost: u,
                     selectCost:o,
-                    selectdateCost:u,
+                    selectdateCost:u
                 }), console.log("allCost:", t.result.data);
+                // a.showMore(o);
             }
         }), wx.cloud.callFunction({
             name: "getMyType",
@@ -319,11 +321,48 @@ Page({
                 }), console.log("allType:", t.result.data);
             }
         });
-    },
+    }, 
+    showMore: function(allcost){
+        let a = this;
+        let showNum = a.data.showNum,
+        selectCost = a.data.selectCost,
+        selectdateCost = [],
+        datelist = [],
+        o = allcost;
+        for(let j = selectCost.length; j < showNum; j++){
+            selectCost.push(o[j]);
+            if(datelist.indexOf(o[j].date) != -1){
+                let price = parseFloat(selectdateCost[datelist.indexOf(o[j].date)].price) 
+                + 
+                parseFloat(o[j].price);
+                selectdateCost[datelist.indexOf(o[j].date)].price = price.toFixed(2);
+                
+            }else{
+                datelist.push(o[j].date);
+                let tmp = {};
+                tmp.date = o[j].date;
+                tmp.price = parseFloat(o[j].price).toFixed(2);
+                selectdateCost.push(tmp);
+            }
+        }
+        a.setData({
+            selectdateCost:selectdateCost,
+            selectCost:selectCost,
+        })
+        },
     onPullDownRefresh: function() {
         console.log("111"), this.onLoad();
     },
     onReachBottom: function() {
-        console.log("222");
+        // let showNum = this.data.showNum,
+        //     allcost = this.data.allCost,
+        //     canshowMore = this.data.canshowMore;
+        //     console.log(canshowMore);
+        // if(canshowMore == 1){
+        //     this.setData({
+        //         showNum:showNum + 15
+        //     })
+        //     this.showMore(allcost);
+        // }
     }
 });
