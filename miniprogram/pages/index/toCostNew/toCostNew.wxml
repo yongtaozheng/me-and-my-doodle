@@ -1,8 +1,9 @@
 <!--miniprogram/pages/index/toCostNew/toCostNew.wxml-->
 <!-- <text>miniprogram/pages/index/toCostNew/toCostNew.wxml</text> -->
 <view>
-  <view>
+  <view class="btn-list">
     <button type="primary" size="mini" data-url="formList/formList" bindtap="toUrl">查看表单</button>
+    <button type="primary" size="mini" bindtap="reflesh">刷新</button>
   </view>
   <myCalendar 
     showTitle="Records of consumption" 
@@ -16,6 +17,11 @@
     <button type="primary" size="mini" bindtap="saveCost">确定</button>
   </view>
   <view class="form-list">
+  <view class="form-item-title-box">
+    <view class="form-item-cost-all">
+      总消费:￥{{allCost}}
+    </view>
+  </view>
     <view class="form-item" wx:for="{{formList}}" wx:key="_id">
       <view class="form-item-title-box" data-index="{{index}}" catchtap="showContent" >
         <view class="form-item-title">

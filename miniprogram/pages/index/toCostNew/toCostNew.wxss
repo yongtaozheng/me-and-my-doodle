@@ -3,8 +3,17 @@
   margin-top: 1rem;
   line-height: 1.5rem;
 }
+.btn-list{
+  display: flex;
+  padding:5px;
+}
 .form-item-title{
   text-indent: 1em;
+}
+.form-item-cost-all{
+  text-align: center;
+  flex: 1;
+  color: chocolate;
 }
 .form-item-cost{
   margin-left: 3em;
