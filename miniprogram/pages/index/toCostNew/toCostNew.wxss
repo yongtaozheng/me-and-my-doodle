@@ -1,4 +1,22 @@
 /* miniprogram/pages/index/toCostNew/toCostNew.wxss */
+.tabbarList{
+  display: flex;
+  widows: 98%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.tabbar{
+  flex: 1;
+  display: flex;
+}
+.selected{
+  background-color: cornflowerblue;
+}
+.tabbarIcon{
+  width: 3rem;
+  height: 3rem;
+  margin: auto auto;
+}
 .form-item:first-child{
   margin-top: 1rem;
   line-height: 1.5rem;

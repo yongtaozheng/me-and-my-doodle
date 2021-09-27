@@ -18,6 +18,25 @@ Page({
     addItemId:'',
     addItemIndex:''
   },
+  //wxShowToast
+  wxShowToast(title='成功',icon='success',duration='1000'){
+    wx.showToast({
+      title: title,
+      icon: icon,
+      duration: duration
+    })
+  },
+  //调用云函数
+  callFunctiom(name,db,_id,data){
+    return wx.cloud.callFunction({
+      name: name,
+      data:{
+        db: db,
+        _id:_id,
+        data: data,
+      }
+    })
+  },
   showDelFormItem(){
     this.setData({
       delBtnShow:!this.data.delBtnShow
@@ -25,13 +44,11 @@ Page({
   },
   showContent(e){
     let index = e.currentTarget.dataset.index;
-    console.log(index);
     let delBtnList = this.data.delBtnList;
     delBtnList[index] = !delBtnList[index];
     this.setData({
       delBtnList:delBtnList
     })
-    console.log(delBtnList)
   },
   deleteItem(e){
     let id = e.currentTarget.dataset.id;
@@ -42,23 +59,25 @@ Page({
       content: '确定删除\"'+ id +'\"',
       success (res) {
         if (res.confirm) {
-          const db = wx.cloud.database()
-          const _ = db.command
-          db.collection('myFormList').doc(id).remove({
-              success:res=>{
-                let delBtnList = _this.data.delBtnList;
-                let formList = _this.data.formList;
-                delBtnList.splice(index,1);
-                formList.splice(index,1);
-                _this.setData({
-                  delBtnList:delBtnList,
-                  formList:formList
-                })
-              },
-              fail:console.error
+          wx.showLoading({title: '正在删除...',});
+          _this.callFunctiom('dbDel','myFormList',id,{}).then(res=>{
+            let delBtnList = _this.data.delBtnList;
+            let formList = _this.data.formList;
+            delBtnList.splice(index,1);
+            formList.splice(index,1);
+            _this.setData({
+              delBtnList:delBtnList,
+              formList:formList
+            })
+            _this.wxShowToast('已删除','success','1000');
+          }).catch(err => {
+            console.log("dbDel",err);
+            _this.wxShowToast('删除失败','error','1000');
+          }).finally(t=>{
+            wx.hideLoading({});
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -83,10 +102,11 @@ Page({
 
   removeItem(e){
     const _this = this;
+    let formList = this.data.formList;
     let addItemId = e.currentTarget.dataset.id,
         addItemIndex = e.currentTarget.dataset.index,
+        addItemIndex2 = e.currentTarget.dataset.index2,
         item = e.currentTarget.dataset.item;
-    // console.log(this.data.allData,addItemId,addItemIndex,addItemIndex2);
     let para = this.data.allData[addItemIndex];
     delete para[item];
     delete para._openid;
@@ -97,14 +117,16 @@ Page({
       content: '确定移除'+ item +'',
       success (res) {
         if (res.confirm) {
-          const db = wx.cloud.database()
-          const _ = db.command
-          db.collection('myFormList').doc(addItemId).set({
-              data:para
-          }).then(res=>{
-            _this.getFormList();
+          _this.callFunctiom('dbSet','myFormList',addItemId,para).then(res=>{
+            formList[addItemIndex].list.splice(addItemIndex2,1);
+            _this.setData({
+              formList:formList
+            })
+            _this.wxShowToast('已移除','success','1000');
+          }).catch(err=>{
+            console.log('err',err);
+            _this.wxShowToast('移除失败','error','1000');
           })
-          .catch(console.error)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -127,45 +149,60 @@ Page({
   },
   //添加表单
   confirmAddFormItem(e){
-    let _this = this;
-    wx.cloud.database().collection("myFormList").add({
-      data: {
-        _id:this.data.theme,
-        // typename: this.data.theme,
-        detail: this.data.mark,
-        username: this.data.username
-      },
-      success: function(a) {
-          wx.showModal({
-              title: "添加表单",
-              content: "已成功添加到表单列表中",
-              showCancel: !1
-          });
-          _this.setData({
-            hiddenmodalput:true,
-            theme:''
-          });
-          _this.getFormList();
-      },
-      fail: console.error
+    wx.showLoading({
+      title: '请稍等……',
     });
+    let _this = this;
+    let para = {
+      _id:this.data.theme,
+      detail: this.data.mark,
+      username: this.data.username
+    };
+    this.callFunctiom('dbAdd','myFormList','',para).then(res=>{
+      wx.showModal({
+          title: "添加表单",
+          content: "已成功添加到表单列表中",
+          showCancel: !1
+      });
+      _this.setData({
+        hiddenmodalput:true,
+        theme:''
+      });
+      let formList = _this.data.formList,
+          delBtnList = _this.data.delBtnList;
+      formList.push(para);
+      delBtnList.push(false);
+      _this.setData({
+        formList:formList,
+        delBtnList:delBtnList
+      })
+      wx.hideLoading({});
+      // _this.getFormList();
+
+    }).catch(err=>{
+      console.log('confirmAddFormItem->dbAdd',err);
+      _this.wxShowToast('添加失败','error','1000');
+    })
   },
   //添加项目
   confirmAddFormItemItem(e){
-    let _this = this;
+    let formList = this.data.formList;
     let item = this.data.item;
     let addItemId = this.data.addItemId;
     let addItemIndex = this.data.addItemIndex;
     let para = {};
     para[item] = item;
-    const db = wx.cloud.database()
-    const _ = db.command
-    db.collection('myFormList').doc(addItemId).update({
-        data:para
-    }).then(res=>{
-      _this.getFormList();
+    // console.log('item',item,'addItemId',addItemId,'addItemIndex',addItemIndex);
+    this.callFunctiom('dbUpdate','myFormList',addItemId,para).then(res=>{
+      formList[addItemIndex].list.push(item);
+      this.setData({
+        formList:formList
+      })
+      _this.wxShowToast('添加成功','success','1000');
+    }).catch(err=>{
+      console.log('confirmAddFormItemItem->dbUpdate',err);
+      _this.wxShowToast('添加失败','error','1000');
     })
-    .catch(console.error)
     this.setData({
       hiddenmodalput1:true,
       item:''
