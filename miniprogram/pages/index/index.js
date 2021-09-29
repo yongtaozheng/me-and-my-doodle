@@ -3,42 +3,57 @@ Page({
         buttonList: [ {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费记录1.png",
             btap: "toCostNew",
+            url:"toCostNew/toCostNew",
             btip: "消费记录"
+        },{
+            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉.png",
+            btap: "toSleep",
+            url:"sleepClock/sleepClock",
+            btip: "睡觉打卡"
         },{
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标签.png",
             btap: "toType",
+            url:"typePage/typePage",
             btip: "查看标签"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费.png",
             btap: "toCost",
+            url:"costPage/costPage",
             btip: "查看消费"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/打卡.png",
             btap: "toDo",
+            url:"todoPage/todoPage",
             btip: "打卡清单"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/电影.png",
             btap: "toFilm",
+            url:"filmPage/filmPage",
             btip: "观影清单"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/留言1.png",
             btap: "",
+            url:"todo",
             btip: "留言板"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/生理期助手.png",
             btap: "toPhysiologicalPeriod",
+            url:"physiologicalPeriodPage/physiologicalPeriodPage",
             btip: "嘟嘟辛苦日"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/纪念日.png",
             btap: "",
+            url:"todo",
             btip: "纪念日"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿树1.png",
             btap: "toWishTree",
+            url:"wishTreePage/wishTreePage",
             btip: "许愿树"
         }, {
             bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/敬请期待.png",
             btap: "",
+            url:"todo",
             btip: "敬请期待"
         } ],
         hiddenmodalput: !1,
@@ -121,39 +136,17 @@ Page({
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     onShareAppMessage: function() {},
-    toCostNew: function(t){
+    toUrl(e){
+        console.log(e);
+        let url = e.target.dataset.url;
+        if(url == 'todo'){
+            wx.showToast({
+              title: '敬请期待',
+            })
+            return;
+        }
         wx.navigateTo({
-            url: "toCostNew/toCostNew"
+            url: url
         });
     },
-    toType: function(t) {
-        wx.navigateTo({
-            url: "typePage/typePage"
-        });
-    },
-    toCost: function(t) {
-        wx.navigateTo({
-            url: "costPage/costPage"
-        });
-    },
-    toFilm: function(t) {
-        wx.navigateTo({
-            url: "filmPage/filmPage"
-        });
-    },
-    toDo: function(t) {
-        wx.navigateTo({
-            url: "todoPage/todoPage"
-        });
-    },
-    toWishTree: function(t) {
-        wx.navigateTo({
-            url: "wishTreePage/wishTreePage"
-        });
-    },
-    toPhysiologicalPeriod: function(t) {
-        wx.navigateTo({
-            url: "physiologicalPeriodPage/physiologicalPeriodPage"
-        });
-    }
 });

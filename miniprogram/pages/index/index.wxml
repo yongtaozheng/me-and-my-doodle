@@ -15,7 +15,8 @@
     <view class="button">
         <view wx:for="{{buttonList}}" wx:key="index">
             <view>
-                <image bindtap="{{item.btap}}" class="image1" src="{{item.bimg}}"></image>
+                <!-- bindtap="{{item.btap}}"  -->
+                <image data-url="{{item.url}}" bindtap="toUrl" class="image1" src="{{item.bimg}}"></image>
             </view>
             <view class="buttontip">
                 <text class="text4">{{item.btip}}</text>

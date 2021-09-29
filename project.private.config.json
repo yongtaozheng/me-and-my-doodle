@@ -39,6 +39,12 @@
         {
           "name": "表单管理",
           "pathName": "pages/index/toCostNew/formList/formList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "睡觉打卡",
+          "pathName": "pages/index/sleepClock/sleepClock",
           "scene": null
         }
       ]

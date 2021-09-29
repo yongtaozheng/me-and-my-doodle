@@ -10,7 +10,8 @@
     "pages/index/wishTreePage/wishTreePage",
     "pages/index/physiologicalPeriodPage/physiologicalPeriodPage",
     "pages/index/toCostNew/toCostNew",
-    "pages/index/toCostNew/formList/formList"
+    "pages/index/toCostNew/formList/formList",
+    "pages/index/sleepClock/sleepClock"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

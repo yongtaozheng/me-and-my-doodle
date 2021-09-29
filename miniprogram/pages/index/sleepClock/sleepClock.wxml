@@ -1,0 +1,11 @@
+<!--miniprogram/pages/index/sleepClock/sleepClock.wxml-->
+<view>
+  <image class="bg-img" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/星星.gif"/>
+  <view class="clock-time">
+    {{hour}}:{{minutes}}:{{second}}
+  </view>
+  <view class="pre-time">上次打卡时间：{{preTime}}</view>
+  <view class="btn-list">
+    <button type="primary" class="clock-btn" bindtap="clock">打卡</button>
+  </view>
+</view>

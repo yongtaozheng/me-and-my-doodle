@@ -31,7 +31,128 @@ App({
         if ("h" == e) return u;
         var o = a.getMinutes() < 10 ? "0" + a.getMinutes() : a.getMinutes();
         if ("m" == e) return o;
-        var i = a.getSeconds();
-        return "s" == e ? i : "t" == e ? r + "-" + n + "-" + g : "st" == e ? r + "/" + n + "/" + g : r + "-" + n + "-" + g + "-" + u + ":" + o + ":" + i;
-    }
+        var i = a.getSeconds() < 10 ? "0" + a.getSeconds() : a.getSeconds();
+        return "s" == e ? i : "t" == e ? r + "-" + n + "-" + g : "st" == e ? r + "/" + n + "/" + g : r + "-" + n + "-" + g + " " + u + ":" + o + ":" + i;
+    },
+    //调用云函数
+    callFunctiom(name,db,_id,data){
+        // console.log("name,db,_id,data",name,db,_id,data);
+        return wx.cloud.callFunction({
+        name: name,
+        data:{
+            db: db,
+            _id:_id,
+            data: data,
+        }
+        })
+    },
+    //获取用户信息
+    getUserInfo(){
+        let user = wx.getStorageSync('username');
+        return user;
+    },
+    /**
+     * 判断润年
+     * @param {string} year 需要判断的年份
+     * @return {Boolean}
+     */
+    isLeap(year) {
+        if((year%4==0 && year%100!=0)||(year%400==0)){
+            return true;
+        }
+        return false;
+    },
+    /**
+ * 获取月份天数
+ * @param {string} year  年份
+ * @param {string} month 月份
+ * @return {string}
+ */
+    getMonthDays(year,month) {
+        month = parseInt(month) - 1;
+        if(month < 0 || month > 11) return ''
+        let months = [31,28,31,30,31,30,31,31,30,31,30,31];
+        if(this.isLeap(year)){
+            months[1] = 29;
+        }
+        return months[month];
+    },
+    //补零
+    addZero(str){
+      if(str < 10){
+        str = '0' + str;
+      }
+      return str;
+    },
+    //获取上一天日期
+    getYesterday(str){
+        let date = str.split('-');
+        let year = parseInt(date[0]),
+            month = parseInt(date[1]),
+            day = parseInt(date[2]);
+        if(month > 12 || month < 1 || day > this.getMonthDays(year,month)) return '日期不合法';
+        day -= 1;
+        if(day > 0){
+            return year + '-' + this.addZero(month) + '-' + this.addZero(day);
+        }
+        month -= 1;
+        if(month > 0){
+            return year + '-' + this.addZero(month) + '-' + this.getMonthDays(year,month);
+        }
+        year -= 1;
+        return year + '-' + 12 + '-' + this.getMonthDays(year,12);
+    },
+    //获取下一天日期
+    getTomorrow(str){
+        let date = str.split('-');
+        let year = parseInt(date[0]),
+            month = parseInt(date[1]),
+            day = parseInt(date[2]);
+        if(month > 12 || month < 1 || day > this.getMonthDays(year,month)) return '日期不合法';
+        day += 1;
+        if(day <= this.getMonthDays(year,month)){
+            return year + '-' + this.addZero(month) + '-' + this.addZero(day);
+        }
+        month += 1;
+        if(month < 13){
+            return year + '-' + this.addZero(month) + '-' + '01';
+        }
+        year += 1;
+        return year + '-' + '01' + '-' + '01';
+    },
+    //获取今天日期
+    getToday (str) {
+        const date = new Date();
+        const year = date.getFullYear(),
+              month = this.addZero(date.getMonth() + 1),
+              day = this.addZero(date.getDate()),
+              hour = this.addZero(date.getHours()),
+              minute = this.addZero(date.getMinutes()),
+              second = this.addZero(date.getSeconds());
+        let res = '';
+        switch (str){
+          case "yyyy-mm-dd":
+            res = year + '-' + month + '-' + day;
+            break;
+          case "mm-dd-yyyy":
+            res = month + '-' + day + '-' + year;
+            break;
+          case "yyyy-mm-dd hh:MM:ss":
+            res = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+            break;
+          case "hh:MM:ss":
+            res = hour + ':' + minute + ':' + second;
+            break;
+          case "yyyy":
+            res = year;
+            break;
+          case "mm-dd":
+            res = month + '-' + day;
+            break;
+          default:
+            res = '参数错误';
+            break;
+        }
+        return res;
+      }
 });
