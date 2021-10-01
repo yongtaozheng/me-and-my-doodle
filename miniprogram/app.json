@@ -11,13 +11,14 @@
     "pages/index/physiologicalPeriodPage/physiologicalPeriodPage",
     "pages/index/toCostNew/toCostNew",
     "pages/index/toCostNew/formList/formList",
-    "pages/index/sleepClock/sleepClock"
+    "pages/index/sleepClock/sleepClock",
+    "pages/index/sleepClock/sleepStatistical/sleepStatistical"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "我和我的嘟嘟",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

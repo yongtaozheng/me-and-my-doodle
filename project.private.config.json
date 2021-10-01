@@ -45,6 +45,18 @@
         {
           "name": "睡觉打卡",
           "pathName": "pages/index/sleepClock/sleepClock",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/sleepModule/sleepIndex",
+          "pathName": "pages/index/sleepModule/sleepIndex",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "打卡统计",
+          "pathName": "pages/index/sleepClock/sleepStatistical/sleepStatistical",
           "scene": null
         }
       ]
