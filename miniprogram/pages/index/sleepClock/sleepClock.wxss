@@ -35,8 +35,18 @@
   margin-top: 20px;
   box-shadow: darkgray 0px 0px 6px 3px;
 }
-
-.title {
+.charts>.charts-btn-list{
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: skyblue;
+  text-decoration: underline;
+}
+.charts>.charts-btn-list>.charts-btn-list-item{
+  flex: 1;
+  text-align: center;
+}
+.charts>.title {
   margin-top: 20px;
   margin-left: 15px;
   color: RGB(46,62,91);

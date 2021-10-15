@@ -54,6 +54,7 @@
           <input type="digit" 
                 data-id="{{item._id}}" 
                 data-prop="{{item2}}" 
+                data-value="{{cost[item._id][item2]}}"
                 bind:input="onChange" 
                 bind:blur="bindblur"
                 placeholder="请输入" 

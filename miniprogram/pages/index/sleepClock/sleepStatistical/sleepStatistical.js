@@ -72,11 +72,11 @@ Page({
     let bear = [],peach = [],date = [];
     for(let i = 0; i < data.length && i < 7; i++){
       let a = '',b = '';
-      if(data[i]['郑勇涛']){
-        a = data[i]['郑勇涛'].split(' ')[1].split(':');
+      if(data[i]['熊先生']){
+        a = data[i]['熊先生'].split(' ')[1].split(':');
       }
-      if(data[i]['李嘉丽']){
-        b = data[i]['李嘉丽'].split(' ')[1].split(':');
+      if(data[i]['桃小姐']){
+        b = data[i]['桃小姐'].split(' ')[1].split(':');
       }
       date.push(data[i]['_id']);
       a ? bear.push((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';

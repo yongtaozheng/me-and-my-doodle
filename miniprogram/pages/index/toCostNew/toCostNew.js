@@ -100,7 +100,7 @@ Page({
         if(cost[id].cost != 0) cost[id].cost = cost[id].cost.toFixed(2);
       }
     }
-    // console.log(cost)   //data-prop 绑定的字符串，以此来确定改变的是哪个变量
+    // console.log(prop)   //data-prop 绑定的字符串，以此来确定改变的是哪个变量
     this.setData({
       cost: cost
     })
@@ -111,7 +111,7 @@ Page({
     let prop = e.currentTarget.dataset.prop;
     let id = e.currentTarget.dataset.id; 
     let cost = this.data.cost;
-    // console.log('bindblur',value);
+    // console.log('bindblur',e);
     if(isNaN(value) || (value == '')){
       cost[id][prop] = 0;
       this.setData({
@@ -244,15 +244,9 @@ Page({
   },
   //获取用户信息
   getUserInfo(){
-    var a = this;
-    wx.getStorage({
-      key: "username",
-      success: function(t) {
-          a.setData({
-              username: t.data,
-              chooseTabbar: t.data == '郑勇涛' ? '1' : '2'
-          });
-      }
+    this.setData({
+      username: app.getUserInfo(),
+      chooseTabbar: app.getShowName() == '熊先生' ? '1' : '2'
     })
   },
   //需要排除的key
@@ -282,7 +276,7 @@ Page({
         cost[data[i]._id] = costTemp;
       }else{
         for(let key in costTemp){
-          cost[data[i]._id][key] = parseFloat(costTemp[key]) + parseFloat(cost[data[i]._id][key]);
+          cost[data[i]._id][key] = (parseFloat(costTemp[key]) + parseFloat(cost[data[i]._id][key])) || 0;
           cost[data[i]._id][key] = cost[data[i]._id][key].toFixed(2);
         }
       }

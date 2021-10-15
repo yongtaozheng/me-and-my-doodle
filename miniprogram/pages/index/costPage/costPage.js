@@ -1,5 +1,5 @@
 var t = require("../../../@babel/runtime/helpers/interopRequireDefault"), e = t(require("../../../@babel/runtime/helpers/toConsumableArray")), a = t(require("../../../@babel/runtime/helpers/defineProperty"));
-
+const app = getApp();
 function o(t, e) {
     var a = Object.keys(t);
     if (Object.getOwnPropertySymbols) {
@@ -35,8 +35,8 @@ Page({
         selectCost:[],
         searchdate:'',//搜索日期
         selecttag:[
-            {_id: "1", typename: "标签", detail: "标签", username: "郑勇涛"},
-            {_id: "2", typename: "时间", detail: "标签", username: "郑勇涛"},
+            {_id: "1", typename: "标签", detail: "标签"},
+            {_id: "2", typename: "时间", detail: "标签"},
         ],
         tagind:0,
         tagdetail:[
@@ -289,7 +289,7 @@ Page({
                 for (var o = t.result.data, n = [], s = {}, l = 0, i = 0; i < o.length; i++) {
                     var c = o[i].time.substring(0, 10);
                     l += parseFloat(o[i].price), n.push(c), o[i].date = n[i], o[i].color = "#ef3473", 
-                    "郑勇涛" == o[i].username && (o[i].color = "skyblue");
+                    app.getUserName('熊先生') == o[i].username && (o[i].color = "skyblue");
                 }
                 n = (0, e.default)(new Set(n)), console.log("sumCost", l);
                 for (var r = 0; r < o.length; r++) {

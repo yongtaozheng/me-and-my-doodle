@@ -12,7 +12,14 @@
   </view>
   <view wx:if="{{selectInd == 1}}">
       <view class="charts">
-          <view class="title">打卡统计</view>
+          <view class="title">打卡统计<span style="font-size:small;">（共{{allClock.length}}条数据）</span></view>
+          <view class="charts-btn-list">
+            <view class="charts-btn-list-item" 
+                  wx:for="{{showDayLists}}"
+                  data-item="{{item.value}}"
+                  bindtap="changShowDays"
+                  >{{item.name}}</view>
+          </view>
           <view class="x"></view>
           <canvas bindtouchstart="touchStart" canvasId="lineCanvas" id="lineCanvas" style="width:100%;height:300px;margin-top:20px;"></canvas>
       </view>

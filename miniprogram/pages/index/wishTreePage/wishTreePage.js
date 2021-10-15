@@ -1,4 +1,4 @@
-var t = getApp();
+var app = getApp();
 
 Page({
     data: {
@@ -45,9 +45,9 @@ Page({
             data: {
                 wish: e.wish,
                 wishdetail: e.wishdetail,
-                username: e.username,
+                username: app.getShowName(),
                 achive: "1",
-                achivetime: t.nowtime()
+                achivetime: app.nowtime()
             }
         }).then(function(t) {
             console.log(t), s.setData({
@@ -161,8 +161,8 @@ Page({
     },
     onReachBottom: function() {},
     onShareAppMessage: function() {
-        var t = "郑勇涛" == this.data.username ? "熊先生" : "桃小姐";
-        return t += "又有新的心意啦，快来看看", console.log(t), {
+        var t = app.getShowName();
+        return t += "又有新的心愿啦，快来看看", console.log(t), {
             title: t,
             success: function(t) {
                 t.errMsg;

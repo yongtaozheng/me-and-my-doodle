@@ -2,15 +2,15 @@
     <image class="img" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/f1ef5781051336643148cdd30bd38e5.png"></image>
     <view bindtap="addbtn" class="add" style="top:6vh;left:39vw;">许愿</view>
     <view class="" wx:for="{{wish1}}" wx:key="index">
-        <image bindlongpress="deletebtn" bindtap="check" class="like" data-id="{{index}}" mode="heightFix" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿单.png" style="top:{{wishlocal[index][0]}}vh;left:{{wishlocal[index][1]}}vw;transform:rotate({{wishlocal[index][2]}}deg);" wx:if="{{item.username=='李嘉丽'}}"></image>
-        <image bindlongpress="deletebtn" bindtap="check" class="like" data-id="{{index}}" mode="heightFix" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿单1.png" style="top:{{wishlocal[index][0]}}vh;left:{{wishlocal[index][1]}}vw;transform:rotate({{wishlocal[index][2]}}deg);" wx:if="{{item.username=='郑勇涛'}}"></image>
+        <image bindlongpress="deletebtn" bindtap="check" class="like" data-id="{{index}}" mode="heightFix" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿单1.png" style="top:{{wishlocal[index][0]}}vh;left:{{wishlocal[index][1]}}vw;transform:rotate({{wishlocal[index][2]}}deg);" wx:if="{{item.username=='熊先生'}}"></image>
+        <image bindlongpress="deletebtn" bindtap="check" class="like" data-id="{{index}}" mode="heightFix" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿单.png" style="top:{{wishlocal[index][0]}}vh;left:{{wishlocal[index][1]}}vw;transform:rotate({{wishlocal[index][2]}}deg);" wx:if="{{item.username=='桃小姐'}}"></image>
     </view>
 </view>
 <view wx:if="{{choose==1}}">
-    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{item.username=='郑勇涛'?'skyblue':'#ef3473'}};" wx:if="{{item.achive==1}}" wx:for="{{wish2}}" wx:key="index">
+    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{item.username=='熊先生'?'skyblue':'#ef3473'}};" wx:if="{{item.achive==1}}" wx:for="{{wish2}}" wx:key="index">
         <image class="image_1" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿池.png"></image>
         <view class="view_wenzi2" data-id="{{index}}">
-            <text>{{item.username=='郑勇涛'?'熊先生':'桃小姐'}}的心愿--{{item.wish}}</text>
+            <text>{{item.username}}的心愿--{{item.wish}}</text>
             <text class="">{{item.wishdetail}}</text>
             <text class="">{{item.achivetime}}</text>
         </view>

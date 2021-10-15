@@ -51,6 +51,15 @@ App({
         let user = wx.getStorageSync('username');
         return user;
     },
+    //获取昵称
+    getShowName(){
+        let user = this.getUserInfo();
+        return user == '郑勇涛' ? '熊先生' : '桃小姐';
+    },
+    //获取姓名
+    getUserName(name){
+        return name == '熊先生' ? '郑勇涛' : '李嘉丽';
+    },
     /**
      * 判断润年
      * @param {string} year 需要判断的年份

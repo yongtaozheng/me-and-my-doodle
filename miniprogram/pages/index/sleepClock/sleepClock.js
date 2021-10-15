@@ -10,7 +10,7 @@ Page({
     hour:'',
     minutes:'',
     second:'',
-    preTime:'',
+    preTime:'获取中……',
     selectInd:0,
     tabinf:[
       {
@@ -31,8 +31,33 @@ Page({
     peach:[],
     allClock:[],
     categories:[],
-    series:[]
+    series:[],
+    showDays:7,//统计天数
+    showDayLists:[
+      {
+        name:"近7天",
+        value:7,
+      },
+      {
+        name:"近15天",
+        value:15
+      },
+      {
+        name:"近30天",
+        value:30
+      }
+    ]
   },
+  //修改统计时间天数
+  changShowDays(e){
+    let item = e.target.dataset.item;
+    this.setData({
+      showDays:item
+    })
+    this.formatClock();
+    this.drawImg();
+  },
+  //获取最近一次打卡时间
   getPreTime(){
     wx.cloud.callFunction({
       name: "getMyType",
@@ -44,8 +69,8 @@ Page({
         console.log(res);
         let d = res.result.data,preTime = '';
         for(let i = 0; i < d.length; i++){
-          if(d[i][this.data.username]){
-            preTime = d[0][this.data.username];
+          if(d[i][app.getShowName()]){
+            preTime = d[i][app.getShowName()];
             break;
           }
         }
@@ -58,6 +83,7 @@ Page({
       }
     })
   },
+  //获取现在时间
   getNowTime(){
     let date = new Date();
     let year = date.getFullYear();
@@ -74,6 +100,7 @@ Page({
     })
     this.refleshTime(hour,minutes,second);
   },
+  //刷新时间
   refleshTime(hour,minutes,second){
     second = parseInt(second) + 1;
     if(second >= 60){
@@ -94,12 +121,14 @@ Page({
       this.refleshTime(hour,minutes,second);
     }, 1000);
   },
+  //数字补零
   addZero(str){
     if(str < 10){
       str = '0' + str;
     }
     return str;
   },
+  //判断时间
   judgeDay(){
     let date = new Date();
     let year = date.getFullYear();
@@ -122,16 +151,18 @@ Page({
     }
     return false;
   },
+  //打卡
   clock(){
     const _this = this;
     let date = this.judgeDay();
     if(this.judgeDay() == false){
       wx.showToast({
         title: '当前不是打卡时间',
+        icon: 'error'
       })
       return;
     }
-    let data = '{\"_id\":\"' + date + '\",\"' + app.getUserInfo() + '\":\"' + app.nowtime() + '\"}';
+    let data = '{\"_id\":\"' + date + '\",\"' + app.getShowName() + '\":\"' + app.nowtime() + '\"}';
     wx.showModal({
       title: '打卡',
       content: '确定打卡吗？',
@@ -142,14 +173,15 @@ Page({
           })
           let para = JSON.parse(data);
           app.callFunctiom('dbAdd','mySleepClock','',para).then(res=>{
-            console.log('res',res);
+            // console.log('res',res);
             if(res.result == null){
-              data = '{\"' + app.getUserInfo() + '\":\"' + app.nowtime() + '\"}';
+              data = '{\"' + app.getShowName() + '\":\"' + app.nowtime() + '\"}';
               para = JSON.parse(data);
               app.callFunctiom('dbUpdate','mySleepClock',date,para).then(res1=>{     
                 wx.showToast({
                   title: '打卡成功',
                 })
+                _this.getAllClock();
                 _this.setData({
                   preTime:app.nowtime()
                 })
@@ -176,11 +208,12 @@ Page({
             console.log('err',err);
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
   },
+  //切换tab页
   changeTabs(e){
     const ind = e.detail.ind;
     this.setData({
@@ -189,8 +222,9 @@ Page({
     if(ind == 1){
       this.drawImg(this.data.series,this.data.categories);
     }
-    console.log(e);
+    // console.log(e);
   },
+  //折线图
   lineCharts: function(series, canvasId, categories, title) {
     var i = 320;
     try {
@@ -215,30 +249,32 @@ Page({
         height: 300
     });
 },
-drawImg(series,categories){
+//绘制折线图
+drawImg(series = this.data.series,categories = this.data.categories){
   let canvasId = 'lineCanvas',title="打卡时间";
-  console.log(series,categories);
-  // let series = [{
-  //   name: '成交量',
-  //   data:['111','123','432'],
-  //   color: "#2E3E5B"
-  // }];
-  // let categories = ['篮球','羽毛球','乒乓球'];
+  // console.log(series,categories);
   this.lineCharts(series, canvasId, categories, title)
 },
-formatClock(data){
+//格式化打卡列表
+formatClock(){
+  let data = [... this.data.allClock];
+  data.reverse();
   let bear = [],peach = [],date = [];
-  for(let i = 0; i < data.length && i < 7; i++){
+  for(let i = 0; i < data.length && i < this.data.showDays; i++){
     let a = '',b = '';
-    if(data[i]['郑勇涛']){
-      a = data[i]['郑勇涛'].split(' ')[1].split(':');
+    if(data[i]['熊先生']){
+      a = data[i]['熊先生'].split(' ')[1].split(':');
+    }else{
+      a = [0,0,0];
     }
-    if(data[i]['李嘉丽']){
-      b = data[i]['李嘉丽'].split(' ')[1].split(':');
+    if(data[i]['桃小姐']){
+      b = data[i]['桃小姐'].split(' ')[1].split(':');
+    }else{
+      b = [0,0,0];
     }
-    date.push(data[i]['_id']);
-    a ? bear.push((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';
-    b ? peach.push((parseInt(b[0]) + (parseInt(b[1]) / 60) + (parseInt(b[2]) / 3600)).toFixed(2)) : '';
+    date.unshift(data[i]['_id']);
+    a ? bear.unshift((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';
+    b ? peach.unshift((parseInt(b[0]) + (parseInt(b[1]) / 60) + (parseInt(b[2]) / 3600)).toFixed(2)) : '';
   }
   let series = [{
     name: '熊先生',
@@ -249,13 +285,12 @@ formatClock(data){
     data:peach,
     color: "pink"
   }];
-  // console.log(series,date);
-  // this.drawImg(series,date);
   this.setData({
     series:series,
     categories:date
   })
 },
+//获取所有打卡时间
 getAllClock(){
   wx.cloud.callFunction({
     name: "getMyType",
@@ -265,11 +300,11 @@ getAllClock(){
         orderRule:'asc'
     },
     success: res => {
-      console.log(res);
+      // console.log(res);
       let d = res.result.data,preTime = '';
-      for(let i = 0; i < d.length; i++){
-        if(d[i][this.data.username]){
-          preTime = d[0][this.data.username];
+      for(let i = d.length - 1; i >= 0; i--){
+        if(d[i][app.getShowName()]){
+          preTime = d[i][app.getShowName()];
           break;
         }
       }
@@ -277,7 +312,7 @@ getAllClock(){
         preTime:preTime,
         allClock:res.result.data
       })
-      this.formatClock(res.result.data);
+      this.formatClock();
     },
     fail: err => {
       console.log('err',err);
