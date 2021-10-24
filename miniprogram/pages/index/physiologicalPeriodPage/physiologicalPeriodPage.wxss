@@ -45,6 +45,7 @@
     border-radius: 50% 50%;
     margin-left: 5vw;
     margin-top: 3vh;
+    background-color: pink;
 }
 
 .hzlists .hzcard .hzdn {
@@ -53,6 +54,7 @@
     margin-left: 3vw;
     width: 80vw;
     border-radius: 5% 5%;
+    background-color: pink;
 }
 
 .hzlists .hzcard .hzdate {

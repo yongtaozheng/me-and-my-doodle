@@ -256,6 +256,7 @@ drawImg(series = this.data.series,categories = this.data.categories){
   this.lineCharts(series, canvasId, categories, title)
 },
 //格式化打卡列表
+//未打卡的日期置为-1
 formatClock(){
   let data = [... this.data.allClock];
   data.reverse();
@@ -265,12 +266,12 @@ formatClock(){
     if(data[i]['熊先生']){
       a = data[i]['熊先生'].split(' ')[1].split(':');
     }else{
-      a = [0,0,0];
+      a = [-1,0,0];
     }
     if(data[i]['桃小姐']){
       b = data[i]['桃小姐'].split(' ')[1].split(':');
     }else{
-      b = [0,0,0];
+      b = [-1,0,0];
     }
     date.unshift(data[i]['_id']);
     a ? bear.unshift((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';
