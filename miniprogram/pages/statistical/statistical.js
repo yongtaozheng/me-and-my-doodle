@@ -97,11 +97,12 @@ Page({
                 }, p.data = [], h.name = "all", h.format = function(e) {
                     return e.toFixed(2) + "元";
                 }, h.data = [];
+                console.log()
                 for (var x = 0; x < n.length; x++) {
                     var y = {}, g = {};
                     -1 == r.indexOf(n[x].ctype) ? (y.name = n[x].ctype, r.push(n[x].ctype), y.data = parseFloat(n[x].price), 
                     i.push(y)) : i[r.indexOf(n[x].ctype)].data += parseFloat(n[x].price), y = {}, g = {}, 
-                    -1 == o.indexOf(n[x].username) ? (g.name = "郑勇涛" == n[x].username ? "熊先生" : "桃小姐", 
+                    -1 == o.indexOf(n[x].username) ? (g.name = t.getUserConfig()[n[x].username].nickName, 
                     o.push(n[x].username), g.data = parseFloat(n[x].price), s.push(g)) : s[o.indexOf(n[x].username)].data += parseFloat(n[x].price), 
                     y = {}, g = {};
                     var v = "第" + t.getWeek(new Date(n[x].time)) + "周";
@@ -109,7 +110,7 @@ Page({
                     -1 == l.indexOf(n[x].username)) l.push(n[x].username), y.format = function(e) {
                         return e.toFixed(2) + "元";
                     }, y.data = [], y.data[d.indexOf(v)] = y.data[d.indexOf(v)] ? y.data[d.indexOf(v)] + parseFloat(n[x].price) : parseFloat(n[x].price), 
-                    y.name = "郑勇涛" == n[x].username ? "熊先生" : "桃小姐", f.push(y); else {
+                    y.name = t.getUserConfig()[n[x].username].nickName, f.push(y); else {
                         var F = l.indexOf(n[x].username);
                         f[F].data[d.indexOf(v)] = f[F].data[d.indexOf(v)] >= 0 ? f[F].data[d.indexOf(v)] + parseFloat(n[x].price) : parseFloat(n[x].price);
                     }
@@ -118,7 +119,7 @@ Page({
                     -1 == m.indexOf(n[x].username)) m.push(n[x].username), y.format = function(e) {
                         return e.toFixed(2) + "元";
                     }, y.data = [], y.data[c.indexOf(v)] = y.data[c.indexOf(v)] ? y.data[c.indexOf(v)] + parseFloat(n[x].price) : parseFloat(n[x].price), 
-                    y.name = "郑勇涛" == n[x].username ? "熊先生" : "桃小姐", u.push(y); else {
+                    y.name = t.getUserConfig()[n[x].username].nickName, u.push(y); else {
                         var O = m.indexOf(n[x].username);
                         u[O].data[c.indexOf(v)] = u[O].data[c.indexOf(v)] >= 0 ? u[O].data[c.indexOf(v)] + parseFloat(n[x].price) : parseFloat(n[x].price);
                     }

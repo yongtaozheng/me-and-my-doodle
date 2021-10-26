@@ -6,7 +6,17 @@ Page({
         wishlocal: [ [ 15, 40, 0 ], [ 23, 25, 7 ], [ 24, 39, 7 ], [ 25, 53, 7 ], [ 32, 20, 7 ], [ 33, 32, 7 ], [ 34, 45, 7 ], [ 35, 59, 7 ], [ 45, 20, -7 ], [ 44, 34, -7 ], [ 43, 48, -7 ], [ 41.5, 63, -7 ], [ 52, 16, 7 ], [ 53, 30, 7 ], [ 54, 45, 7 ], [ 55, 59, 7 ], [ 55, 72, 7 ], [ 66, 10, -7 ], [ 65, 24, -7 ], [ 64, 40, -7 ], [ 63, 56, -7 ], [ 62, 70, -7 ], [ 73, 2, 0 ], [ 73, 15, 0 ], [ 73, 27, 0 ], [ 73, 39, 0 ], [ 73, 52, 0 ], [ 73, 65, 0 ], [ 73, 78, 0 ] ],
         hiddenmodalput: !0,
         tip: "许愿",
-        flag: 0
+        flag: 0,
+        userConfig:app.getUserConfig()
+    },
+    modifUserConfig(){
+        let userConfig = this.data.userConfig;
+        for(let key in userConfig){
+            userConfig[userConfig[key].nickName] = userConfig[key];
+        }
+        this.setData({
+            userConfig:userConfig
+        })
     },
     completeWish: function(t) {
         this.setData({
@@ -124,6 +134,7 @@ Page({
         });
     },
     onLoad: function(t) {
+        this.modifUserConfig();
         var a = this;
         wx.getStorage({
             key: "username",

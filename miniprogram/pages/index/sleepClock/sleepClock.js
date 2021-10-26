@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userConfig:app.getUserConfig(),
     hour:'',
     minutes:'',
     second:'',
@@ -261,31 +262,31 @@ formatClock(){
   let data = [... this.data.allClock];
   data.reverse();
   let bear = [],peach = [],date = [];
+  let userConfig = this.data.userConfig;
+  let users = Object.keys(userConfig);
+  let usersData = [];
+  for(let i = 0; i < users.length; i++) usersData.push([]);
+  console.log('---------',users,usersData);
   for(let i = 0; i < data.length && i < this.data.showDays; i++){
-    let a = '',b = '';
-    if(data[i]['熊先生']){
-      a = data[i]['熊先生'].split(' ')[1].split(':');
-    }else{
-      a = [-1,0,0];
-    }
-    if(data[i]['桃小姐']){
-      b = data[i]['桃小姐'].split(' ')[1].split(':');
-    }else{
-      b = [-1,0,0];
+    for(let j = 0; j < users.length; j++){
+      if(data[i][userConfig[users[j]].nickName]){
+        let a = data[i][userConfig[users[j]].nickName].split(' ')[1].split(':');
+        a ? usersData[j].unshift((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';
+      }else{
+        usersData[j].unshift(-1);
+      }
     }
     date.unshift(data[i]['_id']);
-    a ? bear.unshift((parseInt(a[0]) + (parseInt(a[1]) / 60) + (parseInt(a[2]) / 3600)).toFixed(2)) : '';
-    b ? peach.unshift((parseInt(b[0]) + (parseInt(b[1]) / 60) + (parseInt(b[2]) / 3600)).toFixed(2)) : '';
   }
-  let series = [{
-    name: '熊先生',
-    data:bear,
-    color: "#2E3E5B"
-  },{
-    name: '桃小姐',
-    data:peach,
-    color: "pink"
-  }];
+  let series = [];
+  for(let j = 0; j < users.length; j++){
+    let tmp = {
+      name:userConfig[users[j]].nickName,
+      data:usersData[j],
+      color:userConfig[users[j]].color
+    }
+    series.push({... tmp});
+  }
   this.setData({
     series:series,
     categories:date

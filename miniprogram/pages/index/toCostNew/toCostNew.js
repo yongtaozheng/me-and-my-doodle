@@ -16,22 +16,29 @@ Page({
     allCostList:{},
     bearCostList:{},
     peachCostList:{},
-    tabbar:[
-      {
-        id:1,
-        name:'熊先生',
-        icon:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/熊熊.png'
-      },
-      {
-        id:2,
-        name:'桃小姐',
-        icon:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/桃子.png'
-      },{
-        id:3,
-        name:'嘟嘟',
-        icon:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/情侣.png'
+    userConfig:app.getUserConfig(),
+    tabbar:[]
+  },
+  //获取tabbar
+  getTabBar(){
+    const userConfig = this.data.userConfig;
+    let tabbar = [];
+    for(let key in userConfig){
+      let tmp = {
+        id:tabbar.length + 1,
+        name:userConfig[key].nickName,
+        icon:userConfig[key].icon
       }
-    ]
+      tabbar.push({...tmp});
+    }
+    tabbar.push({
+      id:3,
+      name:'嘟嘟',
+      icon:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/情侣.png'
+    });
+    this.setData({
+      tabbar:tabbar
+    })
   },
   //调用云函数
   callFunctiom(name,db,_id,data){
@@ -244,9 +251,15 @@ Page({
   },
   //获取用户信息
   getUserInfo(){
+    const userConfig = this.data.userConfig;
+    let ind = 0;
+    for(let key in userConfig){
+      ind++;
+      if(key == app.getUserInfo()) break;
+    }
     this.setData({
       username: app.getUserInfo(),
-      chooseTabbar: app.getShowName() == '熊先生' ? '1' : '2'
+      chooseTabbar: ind.toString()
     })
   },
   //需要排除的key
@@ -313,7 +326,8 @@ Page({
         if(this.exceptionKey(exception,key)){
           temp[key] = data[i][key];
         }else{
-          list.push(key);
+          if(key == '早餐') list.unshift(key);
+          else list.push(key);
         }
       }
       temp.list = list;
@@ -362,7 +376,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getTabBar();
   },
 
   /**

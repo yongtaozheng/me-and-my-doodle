@@ -4,7 +4,7 @@
         <scroll-view class="title">
       《{{item.filmname}}》
       <view class="name">
-        {{item.username=='郑勇涛'?'熊先生':'桃小姐'}}--{{item.time}}
+        {{userConfig[item.username].nickName}}--{{item.time}}
       </view>
         </scroll-view>
         <scroll-view scrollY class="int">{{item.inf}}</scroll-view>

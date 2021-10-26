@@ -43,6 +43,7 @@ Page({
         ],//搜索标签
         showNum:15,//显示条数
         canshowMore:1,
+        userConfig:app.getUserConfig()
     },
     getAllTime: function() {
         for (var t = this.data.allCost, e = [], a = 0; a < t.length; a++) e.push(t[a].time.substring(0, 10));
@@ -288,8 +289,7 @@ Page({
             success: function(t) {
                 for (var o = t.result.data, n = [], s = {}, l = 0, i = 0; i < o.length; i++) {
                     var c = o[i].time.substring(0, 10);
-                    l += parseFloat(o[i].price), n.push(c), o[i].date = n[i], o[i].color = "#ef3473", 
-                    app.getUserName('熊先生') == o[i].username && (o[i].color = "skyblue");
+                    l += parseFloat(o[i].price), n.push(c), o[i].date = n[i];
                 }
                 n = (0, e.default)(new Set(n)), console.log("sumCost", l);
                 for (var r = 0; r < o.length; r++) {

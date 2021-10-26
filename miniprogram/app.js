@@ -1,3 +1,4 @@
+var userConfig = require('./config/userConfig.js');
 App({
     onLaunch: function() {
         wx.cloud ? wx.cloud.init({
@@ -54,11 +55,20 @@ App({
     //获取昵称
     getShowName(){
         let user = this.getUserInfo();
-        return user == '郑勇涛' ? '熊先生' : '桃小姐';
+        return  userConfig.userConfig[user].nickName;
     },
     //获取姓名
     getUserName(name){
-        return name == '熊先生' ? '郑勇涛' : '李嘉丽';
+        let users = userConfig.userConfig;
+        for(let key in users){
+            if(user[key].nickName == name){
+                return key;
+            }
+        }
+        return '';
+    },
+    getUserConfig(){
+        return userConfig.userConfig;
     },
     /**
      * 判断润年

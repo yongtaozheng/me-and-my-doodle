@@ -18,10 +18,10 @@
     <view class="divLine"></view>
     <view class="date">----{{i.date}}----合计：￥{{i.price}}</view>
     <view class="divLine"></view>
-    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{item.color}};" wx:if="{{i.date==item.date}}" wx:for="{{selectCost}}" wx:key="index">
+    <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{userConfig[item.username].color}};" wx:if="{{i.date==item.date}}" wx:for="{{selectCost}}" wx:key="index">
         <image class="image_1" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费总额.png"></image>
         <view class="view_wenzi2" data-id="{{index}}">
-            <text>#{{item.ctype}}--{{item.username=='郑勇涛'?'熊先生':'桃小姐'}}--￥{{item.price}}</text>
+            <text>#{{item.ctype}}--{{userConfig[item.username].nickName}}--￥{{item.price}}</text>
             <text class="text_small">{{item.time}}</text>
             <text class="text_small">备注：{{item.mark}}</text>
             <text class="text_small">{{item.place}}</text>

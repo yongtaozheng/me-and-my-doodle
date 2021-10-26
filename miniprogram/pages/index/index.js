@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
     data: {
         buttonList: [ {
@@ -75,22 +76,14 @@ Page({
         });
     },
     confirm: function(t) {
-        var o = this.data.username, i = this.data.tpassword;
-        console.log(o, i), "郑勇涛" == o && "zhengyongtao" == i ? (wx.setStorage({
+        console.log("onLoad",app.getUserConfig());
+        const users = app.getUserConfig();
+        let o = this.data.username, i = this.data.tpassword;
+        users[o] != undefined && users[o].password == i ? (wx.setStorage({
             key: "username",
-            data: "郑勇涛"
+            data: o
         }), wx.showToast({
-            title: "欢迎熊先生",
-            icon: "success"
-        }), wx.showTabBar({
-            animation: !0
-        }), this.setData({
-            hiddenmodalput: !0
-        })) : "李嘉丽" == o && "lijiali" == i ? (wx.setStorage({
-            key: "username",
-            data: "李嘉丽"
-        }), wx.showToast({
-            title: "欢迎桃小姐",
+            title: "欢迎" + users[o].nickName,
             icon: "success"
         }), wx.showTabBar({
             animation: !0

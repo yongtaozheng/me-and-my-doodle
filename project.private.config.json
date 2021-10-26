@@ -57,6 +57,24 @@
         {
           "name": "打卡统计",
           "pathName": "pages/index/sleepClock/sleepStatistical/sleepStatistical",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/costPage/costPage",
+          "pathName": "pages/index/costPage/costPage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/statistical/statistical",
+          "pathName": "pages/statistical/statistical",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/wishTreePage/wishTreePage",
+          "pathName": "pages/index/wishTreePage/wishTreePage",
           "scene": null
         }
       ]
