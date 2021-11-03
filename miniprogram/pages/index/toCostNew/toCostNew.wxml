@@ -49,6 +49,12 @@
         <view class="form-item-delete" wx:if="{{delBtnShow}}" data-index="{{index}}" data-id="{{item._id}}" catchtap="deleteItem">X</view>
       </view>
       <view class="form-item-content" wx:if="{{delBtnList[index]}}">
+        <view bindtap="showAddFormItemModal" 
+              class="form-item-content-add"
+              data-id="{{item._id}}"
+              >
+              自定义添加
+        </view>
         <view class="form-item-content-item" wx:for-item="item2" wx:for-index="index2" wx:for="{{item.list}}" wx:key="index2">
           <text class="form-item-content-item-text">{{item2}}:</text>
           <input type="digit" 
@@ -63,5 +69,21 @@
         </view>
       </view>
     </view>
+  </view>
+  <view bindtap="hideModal" catchtouchmove="preventTouchMove" class="modal-mask" wx:if="{{!hiddenmodalput}}"></view>
+  <view class="modal-dialog" wx:if="{{!hiddenmodalput}}">
+      <view class="modal-title">{{tip}}</view>
+      <view class="modal-content">
+          <view class="modal-input">
+              <input bindinput="inputTheme" class="input" maxlength="20" placeholder="项目" placeholderClass="input-holder" type="text" value="{{theme}}"></input>
+          </view>
+          <view class="modal-input">
+              <input bindinput="inputMark" class="input" maxlength="20" placeholder="金额" placeholderClass="input-holder" type="text" value="{{mark}}"></input>
+          </view>
+      </view>
+      <view class="modal-footer">
+          <view bindtap="cancel" class="btn-cancel" data-status="cancel">取消</view>
+          <view bindtap="addItem" class="btn-confirm" data-status="confirm">确定</view>
+      </view>
   </view>
 </view>

@@ -17,7 +17,18 @@ Page({
     bearCostList:{},
     peachCostList:{},
     userConfig:app.getUserConfig(),
-    tabbar:[]
+    tabbar:[],
+    hiddenmodalput:true,
+    theme:'',
+    mark:'',
+    tip:'添加表单',
+    addItemName:''
+  },
+  initData(){
+    this.setData({
+      formList:[],
+      cost:{}
+    })
   },
   //获取tabbar
   getTabBar(){
@@ -73,10 +84,35 @@ Page({
       })
     }
     this.calAllCost();
+    this.refleshForm();
   },
   //刷新页面
   reflesh(){
     this.onLoad();
+  },
+  //刷新表单
+  refleshForm(){
+    let cost = this.data.cost;
+    let allData = [... this.data.allData];
+    for(let i = 0; i < allData.length; i++){
+      if(allData[i]._id != '其它') allData[i] = allData[i]._id;
+    }
+    allData.push('其它');
+    let formList = [];
+    for(let key in cost){
+      let temp = {_id:'',list:[]};
+      temp._id = key;
+      for(let k in cost[key]){
+        if(k !== 'cost') temp.list.push(k);
+      }
+      formList.push({...temp});
+    }
+    formList = formList.sort((a,b)=>{
+      return allData.indexOf(a._id) - allData.indexOf(b._id);
+    })
+    this.setData({
+      formList:formList
+    })
   },
   //wxShowToast
   wxShowToast(title='成功',icon='success',duration='1000'){
@@ -85,6 +121,52 @@ Page({
       icon: icon,
       duration: duration
     })
+  },
+  //自定义添加
+  addItem(e){
+    let cost = this.data.cost;
+    let money = this.data.mark;
+    let item = this.data.theme;
+    let addItem = this.data.addItemName;
+    let formList = this.data.formList;
+    let ind = -1;
+    for(let i = 0; i < formList.length; i++){
+      if(formList[i]._id == addItem){
+        ind = i;
+        break;
+      }
+    }
+    cost[addItem].cost = parseFloat(cost[addItem].cost) + parseFloat(money);
+    cost[addItem].cost = cost[addItem].cost.toFixed(2);
+    cost[addItem][item] = money;
+    formList[ind].list.push(item);
+    this.setData({
+      hiddenmodalput:true,
+      cost:cost,
+      formList:formList
+    })
+  },
+  showAddFormItemModal(e){
+    this.setData({
+      hiddenmodalput:false,
+      addItemName:e.target.dataset.id
+    });
+  },
+  //取消项目弹窗
+  cancel(e){
+    this.setData({
+      hiddenmodalput:true
+    })
+  },
+  inputTheme: function(t) {
+    this.setData({
+        theme: t.detail.value
+    });
+  },
+  inputMark: function(t) {
+    this.setData({
+        mark: t.detail.value
+    });
   },
   //页面跳转
   toUrl: function(e) {
@@ -146,9 +228,13 @@ Page({
     let allCostList = this.data.allCostList;
     let bear = this.data.bearCostList;
     let peach = this.data.peachCostList;
+    for(let k in allCostList){
+      Object.assign(allCostList[k],peach[k],bear[k]);
+    }
+    // console.log('-----allCostList-',allCostList);
     for(let key in allCostList){
       for(let key1 in allCostList[key]){
-        allCostList[key][key1] = parseFloat(bear[key][key1]) + parseFloat(peach[key][key1]);
+        allCostList[key][key1] = parseFloat(bear[key][key1] || 0) + parseFloat(peach[key][key1] || 0);
         allCostList[key][key1] = allCostList[key][key1].toFixed(2);
       }
     }
@@ -169,6 +255,7 @@ Page({
       title: '获取数据中……',
     })
     let _this = this;
+    // this.initData();
     this.callFunctiom('dbGet','myCostNew',selectdate,{}).then(res=>{
       // console.log('getCostData',res);
       let result = res.result;
@@ -188,6 +275,7 @@ Page({
       _this.formatFormCost(this.data.allData,{},3);
     }).finally(p=>{
       this.calAllCost();
+      this.refleshForm();
       setTimeout(() => {
         wx.hideLoading();
         this.calAllCostList();
@@ -316,6 +404,7 @@ Page({
   },
   //格式化列表
   formatFormList(data){
+    // console.log('--------------',data);
     let delBtnList = [];
     let exception = ["_openid","username","_id","detail"];
     let newData = [];
