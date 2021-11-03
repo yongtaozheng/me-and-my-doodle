@@ -93,6 +93,7 @@ Page({
   //刷新表单
   refleshForm(){
     let cost = this.data.cost;
+    let sortBy = ['早餐','午餐','晚餐','宵夜','其它','其他'];
     let allData = [... this.data.allData];
     for(let i = 0; i < allData.length; i++){
       if(allData[i]._id != '其它') allData[i] = allData[i]._id;
@@ -105,6 +106,9 @@ Page({
       for(let k in cost[key]){
         if(k !== 'cost') temp.list.push(k);
       }
+      temp.list = temp.list.sort((a,b)=>{
+        return sortBy.indexOf(a) - sortBy.indexOf(b);
+      })
       formList.push({...temp});
     }
     formList = formList.sort((a,b)=>{
