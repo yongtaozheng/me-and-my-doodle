@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
     data: {
         choose: 0,
@@ -6,7 +7,13 @@ Page({
         btnLeft: 0,
         windowHeight: "",
         windowWidth: "",
-        hiddenmodalput: !0
+        hiddenmodalput: !0,
+        addImg1:app.getImgSrc('添加1.png'),
+        watchImg:app.getImgSrc('观看.png'),
+        watchImg1:app.getImgSrc('观看1.png'),
+        watchHistoryImg:app.getImgSrc('历史观看.png'),
+        watchHistoryImg1:app.getImgSrc('历史观看1.png'),
+
     },
     changeTab: function(t) {
         var n = t.currentTarget.dataset.id, e = "观影清单";

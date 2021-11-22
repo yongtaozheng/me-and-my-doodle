@@ -6,15 +6,7 @@ const db = cloud.database()
 const _ = db.command
 exports.main = async (event, context) => {
   try {
-    return await db.collection('_courseHomeworkSubmit').where({
-      _id: event._id
-    })
-      .update({
-        data: {
-          score:event.score,
-          state:event.state
-        },
-      })
+    return await db.createCollection(event.db)
   } catch (e) {
     console.error(e)
   }

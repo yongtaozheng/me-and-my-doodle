@@ -2,14 +2,14 @@
     <view class="title">我的标签</view>
     <view class="image-parent">
         <view class="img-group" wx:for="{{myType}}" wx:key="index">
-            <image bindlongpress="delType" bindtap="showDetail" class="image" data-id="{{index}}" mode="widthFix" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标签1.png"></image>
+            <image bindlongpress="delType" bindtap="showDetail" class="image" data-id="{{index}}" mode="widthFix" src="{{flagImg1}}"></image>
             <view bindlongpress="delType" bindtap="showDetail" class="child" data-id="{{index}}">#{{item}}</view>
         </view>
     </view>
     <view class="tabBar">
         <view class="tabBar-item">
             <view bindtap="addType">
-                <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/添加.png"></image>
+                <image class="tabBar-icon" src="{{addImg}}"></image>
             </view>
             <view bindtap="addType" class="">添加新标签</view>
         </view>

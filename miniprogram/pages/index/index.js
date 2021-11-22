@@ -2,57 +2,57 @@ const app = getApp();
 Page({
     data: {
         buttonList: [ {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费记录1.png",
+            bimg: app.getImgSrc('消费记录1.png'),
             btap: "toCostNew",
             url:"toCostNew/toCostNew",
             btip: "消费记录"
         },{
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉.png",
+            bimg: app.getImgSrc('睡觉.png'),
             btap: "toSleep",
             url:"sleepClock/sleepClock",
             btip: "睡觉打卡"
         },{
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/标签.png",
+            bimg: app.getImgSrc('标签.png'),
             btap: "toType",
             url:"typePage/typePage",
             btip: "查看标签"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/消费.png",
+            bimg: app.getImgSrc('消费.png'),
             btap: "toCost",
             url:"costPage/costPage",
             btip: "查看消费"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/打卡.png",
+            bimg: app.getImgSrc('打卡.png'),
             btap: "toDo",
             url:"todoPage/todoPage",
             btip: "打卡清单"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/电影.png",
+            bimg: app.getImgSrc('电影.png'),
             btap: "toFilm",
             url:"filmPage/filmPage",
             btip: "观影清单"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/留言1.png",
+            bimg: app.getImgSrc('留言1.png'),
             btap: "",
             url:"todo",
             btip: "留言板"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/生理期助手.png",
+            bimg: app.getImgSrc('生理期助手.png'),
             btap: "toPhysiologicalPeriod",
             url:"physiologicalPeriodPage/physiologicalPeriodPage",
             btip: "嘟嘟辛苦日"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/纪念日.png",
+            bimg: app.getImgSrc('纪念日.png'),
             btap: "",
             url:"todo",
             btip: "纪念日"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿树1.png",
+            bimg: app.getImgSrc('许愿树1.png'),
             btap: "toWishTree",
             url:"wishTreePage/wishTreePage",
             btip: "许愿树"
         }, {
-            bimg: "cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/敬请期待.png",
+            bimg: app.getImgSrc('敬请期待.png'),
             btap: "",
             url:"todo",
             btip: "敬请期待"

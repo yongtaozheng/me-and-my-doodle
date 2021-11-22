@@ -7,7 +7,11 @@
 	</view>
 </view>
 <view class="wode_item_wrap">
-    <view class="wode_item" wx:for="{{mode}}">
+    <view class="wode_item" bindtap="createCollections">
+		初始化数据库
+		<span class="arrow_wrap"></span>
+    </view>
+    <view class="wode_item" wx:for="{{mode}}" wx:key="index">
 		{{item}}
 		<span class="arrow_wrap"></span>
     </view>

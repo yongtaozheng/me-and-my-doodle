@@ -7,7 +7,7 @@
   </view>
   <myCalendar 
     showTitle="Records of consumption" 
-    flagImg="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/钱.png"
+    flagImg="{{flagImg}}"
     bind:select="select" 
     bind:today="today" 
     id="calendar"

@@ -1,4 +1,5 @@
 var userConfig = require('./config/userConfig.js');
+var configIndex = require('./config/index.js').configIndex;
 App({
     onLaunch: function() {
         wx.cloud ? wx.cloud.init({
@@ -46,6 +47,10 @@ App({
             data: data,
         }
         })
+    },
+    //获取图片路径
+    getImgSrc(str){
+        return  configIndex.imageSrc + str;
     },
     //获取用户信息
     getUserInfo(){

@@ -5,7 +5,9 @@ Page({
         myType: [],
         allType: {},
         hiddenmodalput: !0,
-        tip: "新添标签"
+        tip: "新添标签",
+        flagImg1:t.getImgSrc('标签1.png'),
+        addImg:t.getImgSrc('添加.png'),
     },
     getMyType: function() {
         for (var t = this.data.allType, a = [], e = 0; e < t.length; e++) a.push(t[e].typename);

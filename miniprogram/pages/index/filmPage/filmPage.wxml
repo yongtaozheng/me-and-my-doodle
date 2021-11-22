@@ -12,20 +12,20 @@
     </view>
 </view>
 <view bindtouchend="buttonEnd" bindtouchstart="buttonStart" catchtap="add" catchtouchmove="buttonMove" class="addbtn" style="top:{{btnTop}}px;left:{{btnLeft}}px" wx:if="{{choose==0}}">
-    <image class="addimg" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/添加1.png"></image>
+    <image class="addimg" src="{{addImg1}}"></image>
 </view>
 <view class="tabBar">
     <view class="tabBar-item">
         <view bindtap="changeTab" data-id="0">
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/观看.png" wx:if="{{choose==1}}"></image>
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/观看1.png" wx:if="{{choose==0}}"></image>
+            <image class="tabBar-icon" src="{{watchImg}}" wx:if="{{choose==1}}"></image>
+            <image class="tabBar-icon" src="{{watchImg1}}" wx:if="{{choose==0}}"></image>
         </view>
         <view bindtap="changeTab" class="" data-id="0">未看</view>
     </view>
     <view class="tabBar-item">
         <view bindtap="changeTab" data-id="1">
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/历史观看.png" wx:if="{{choose==0}}"></image>
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/历史观看1.png" wx:if="{{choose==1}}"></image>
+            <image class="tabBar-icon" src="{{watchHistoryImg}}" wx:if="{{choose==0}}"></image>
+            <image class="tabBar-icon" src="{{watchHistoryImg1}}" wx:if="{{choose==1}}"></image>
         </view>
         <view bindtap="changeTab" class="" data-id="1">观看记录</view>
     </view>

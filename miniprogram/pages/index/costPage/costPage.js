@@ -43,7 +43,9 @@ Page({
         ],//搜索标签
         showNum:15,//显示条数
         canshowMore:1,
-        userConfig:app.getUserConfig()
+        userConfig:app.getUserConfig(),
+        allCostImg:app.getImgSrc('消费总额.png'),
+        costHistory:app.getImgSrc('消费记录.png'),
     },
     getAllTime: function() {
         for (var t = this.data.allCost, e = [], a = 0; a < t.length; a++) e.push(t[a].time.substring(0, 10));

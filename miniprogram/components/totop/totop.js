@@ -1,4 +1,5 @@
 // components/totop/totop.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -11,7 +12,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    imgSrc:app.getImgSrc('返回顶部 .png')
   },
 
   /**

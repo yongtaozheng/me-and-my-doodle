@@ -1,5 +1,5 @@
 <view wx:if="{{choose==0}}">
-    <image class="img" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/f1ef5781051336643148cdd30bd38e5.png"></image>
+    <image class="img" src="{{treeImg}}"></image>
     <view bindtap="addbtn" class="add" style="top:6vh;left:39vw;">许愿</view>
     <view class="" wx:for="{{wish1}}" wx:key="index">
         <image bindlongpress="deletebtn" bindtap="check" class="like" data-id="{{index}}" mode="heightFix" src="{{userConfig[item.username].wishIcon}}" style="top:{{wishlocal[index][0]}}vh;left:{{wishlocal[index][1]}}vw;transform:rotate({{wishlocal[index][2]}}deg);"></image>
@@ -7,7 +7,7 @@
 </view>
 <view wx:if="{{choose==1}}">
     <view bindlongpress="delCost" bindtap="click" class="view_tupian_wenzi" data-id="{{index}}" id="{{index}}" style="background-color:{{userConfig[item.username].color}};" wx:if="{{item.achive==1}}" wx:for="{{wish2}}" wx:key="index">
-        <image class="image_1" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿池.png"></image>
+        <image class="image_1" src="{{wishPoolImg}}"></image>
         <view class="view_wenzi2" data-id="{{index}}">
             <text>{{userConfig[item.username].nickName}}的心愿--{{item.wish}}</text>
             <text class="">{{item.wishdetail}}</text>
@@ -18,15 +18,15 @@
 <view class="tabBar">
     <view class="tabBar-item">
         <view bindtap="addWish">
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿池.png" wx:if="{{choose==1}}"></image>
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/许愿池1.png" wx:if="{{choose==0}}"></image>
+            <image class="tabBar-icon" src="{{wishPoolImg}}" wx:if="{{choose==1}}"></image>
+            <image class="tabBar-icon" src="{{wishPoolImg1}}" wx:if="{{choose==0}}"></image>
         </view>
         <view bindtap="addWish" class="">许愿</view>
     </view>
     <view class="tabBar-item">
         <view bindtap="completeWish">
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿.png" wx:if="{{choose==0}}"></image>
-            <image class="tabBar-icon" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/心愿1.png" wx:if="{{choose==1}}"></image>
+            <image class="tabBar-icon" src="{{wishImg}}" wx:if="{{choose==0}}"></image>
+            <image class="tabBar-icon" src="{{wishImg1}}" wx:if="{{choose==1}}"></image>
         </view>
         <view bindtap="completeWish" class="">已实现</view>
     </view>

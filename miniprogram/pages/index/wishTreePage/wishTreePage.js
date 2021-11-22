@@ -7,7 +7,12 @@ Page({
         hiddenmodalput: !0,
         tip: "许愿",
         flag: 0,
-        userConfig:app.getUserConfig()
+        userConfig:app.getUserConfig(),
+        treeImg:app.getImgSrc('f1ef5781051336643148cdd30bd38e5.png'),
+        wishPoolImg:app.getImgSrc('许愿池.png'),
+        wishPoolImg1:app.getImgSrc('许愿池1.png'),
+        wishImg:app.getImgSrc('心愿.png'),
+        wishImg1:app.getImgSrc('心愿1.png'),
     },
     modifUserConfig(){
         let userConfig = this.data.userConfig;

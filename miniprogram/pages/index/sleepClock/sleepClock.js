@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    startBgSrc:app.getImgSrc('星星.gif'),
     userConfig:app.getUserConfig(),
     hour:'',
     minutes:'',
@@ -16,14 +17,14 @@ Page({
     tabinf:[
       {
         id:0,
-        img:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉1.png',
-        img1:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉.png',
+        img:app.getImgSrc('睡觉1.png'),
+        img1:app.getImgSrc('睡觉.png'),
         title:'打卡'
       },
       {
         id:1,
-        img:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/统计1.png',
-        img1:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/统计.png',
+        img:app.getImgSrc('统计1.png'),
+        img1:app.getImgSrc('统计.png'),
         title:'统计'
       }
     ],

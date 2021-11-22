@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    flagImg:app.getImgSrc('钱.png'),
     username:'',
     allData:[],
     formList:[],
@@ -45,7 +46,7 @@ Page({
     tabbar.push({
       id:3,
       name:'嘟嘟',
-      icon:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/情侣.png'
+      icon:app.getImgSrc('情侣.png'),
     });
     this.setData({
       tabbar:tabbar

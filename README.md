@@ -19,8 +19,13 @@
 使用的微信小程序原生的云开发。
 欢迎大家参与开发。
 期待大家的建议。
-博客地址：[程序员的浪漫之——情侣日常小程序](https://blog.csdn.net/Twinkle_sone/article/details/119927555)
+博客地址：
+[程序员的浪漫之——情侣日常小程序](https://blog.csdn.net/Twinkle_sone/article/details/119927555)
 [情侣小程序2.0版本已提上日程](https://blog.csdn.net/Twinkle_sone/article/details/120793428)
+
+#### 二次开发教程
+[手把手教学，从零到一打造一款专属的情侣小程序](https://blog.csdn.net/Twinkle_sone/article/details/121484742)
+
 
 #### 软件架构
 软件架构说明
@@ -37,9 +42,7 @@
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.[手把手教学，从零到一打造一款专属的情侣小程序](https://blog.csdn.net/Twinkle_sone/article/details/121484742)
 
 #### 参与贡献
 

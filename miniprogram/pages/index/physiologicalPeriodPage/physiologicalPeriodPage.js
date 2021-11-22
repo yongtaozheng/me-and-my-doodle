@@ -3,7 +3,11 @@ var e = getApp();
 Page({
     data: {
         flag: 0,
-        choose: 0
+        choose: 0,
+        flagImg:e.getImgSrc('标记.png'),
+        flagImg1:e.getImgSrc('标记1.png'),
+        allImg:e.getImgSrc('汇总.png'),
+        allImg1:e.getImgSrc('汇总1.png')
     },
     select: function(e) {
         this.setData({

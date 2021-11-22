@@ -11,15 +11,15 @@ Page({
     peach:[],
     tabinf:[
       {
-        id:1,
-        img:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉1.png',
-        img1:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/睡觉.png',
+        id:0,
+        img:app.getImgSrc('睡觉1.png'),
+        img1:app.getImgSrc('睡觉.png'),
         title:'打卡'
       },
       {
-        id:0,
-        img:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/统计1.png',
-        img1:'cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/统计.png',
+        id:1,
+        img:app.getImgSrc('统计1.png'),
+        img1:app.getImgSrc('统计.png'),
         title:'统计'
       }
     ],

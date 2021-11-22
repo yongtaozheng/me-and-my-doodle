@@ -1,5 +1,5 @@
 <!--components/totop/totop.wxml-->
 <!-- <text>components/totop/totop.wxml</text> -->
 <view class="v" bindtap="totopbtn">
-  <image class="img" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/返回顶部 .png" bindtap="totopbtn"></image>
+  <image class="img" src="{{imgSrc}}" bindtap="totopbtn"></image>
 </view>

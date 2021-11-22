@@ -1,5 +1,4 @@
-getApp();
-
+const app = getApp();
 Component({
     properties: {
         defaultValue: {
@@ -33,7 +32,8 @@ Component({
         scrollLeft: 0,
         YEAR: 0,
         MONTH: 0,
-        DATE: 0
+        DATE: 0,
+        flagImgSrc:app.getImgSrc('桃子.png')
     },
     ready: function() {
         this.today(), console.log("加载日历组件");

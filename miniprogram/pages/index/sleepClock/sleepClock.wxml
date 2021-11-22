@@ -1,7 +1,7 @@
 <!--miniprogram/pages/index/sleepClock/sleepClock.wxml-->
 <view>
   <view wx:if="{{selectInd == 0}}">
-    <image class="bg-img" src="cloud://it-cloud-hdrd7.6974-it-cloud-hdrd7-1300036058/记账本/星星.gif"/>
+    <image class="bg-img" src="{{startBgSrc}}"/>
     <view class="clock-time">
       {{hour}}:{{minutes}}:{{second}}
     </view>
