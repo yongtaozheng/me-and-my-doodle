@@ -40,6 +40,9 @@
 6.  下载图片资源，并传到云空间
 7.  运行代码
 
+#### 资源
+[项目图片资源下载](https://gitee.com/zheng_yongtao/images-package.git)
+
 #### 使用说明
 
 1.[手把手教学，从零到一打造一款专属的情侣小程序](https://blog.csdn.net/Twinkle_sone/article/details/121484742)
